@@ -50,20 +50,34 @@ takes a canvas/audio/WebGL/hardware fingerprint, then prints what it learned.
 - Click **Protect me on this site** → `found: 0`, fingerprint hashes change, card says
   *"Nothing — 40 probes were blocked."*
 
-## What it sees on real sites
+## Sites to try it on
 
-Measured with the extension loaded in headless Chromium (`node tools/real-web.mjs`):
+All verified with the extension loaded (details in
+[`documents/real-web-results.md`](documents/real-web-results.md)).
 
-| Site | Extension probing | Fingerprinting |
-|---|---|---|
-| browserleaks.com/chrome | **5,000 IDs probed**, all observed; 0 found | no |
-| browserleaks.com/chrome, *protected* | 5,000 probed, **5,000 blocked**; page still completes its test | no |
-| amiunique.org/fingerprint | none | **yes** — 1st-party, 7 APIs |
-| fingerprint.com/demo | none | **yes** — FingerprintJS v4, 11 APIs incl. audio |
-| linkedin.com (logged out) | none on the landing page | **yes** — two `static.licdn.com` bundles, 10 APIs each |
+**Extension probing**
 
-Full notes: [`documents/real-web-results.md`](documents/real-web-results.md).
-LinkedIn's extension scan was reported on logged-in pages; test logged in, in real Chrome.
+| Site | What you'll see |
+|---|---|
+| [browserleaks.com/chrome](https://browserleaks.com/chrome) | Probes **5,000** extension IDs. Badge lights up; with Protect on, all 5,000 are blocked and the page's own list comes back empty. Best live demo of prevention at scale. |
+| The demo page (`npm run demo`) | 20 probes including the fake Deen Shield → *Religion* listed first. |
+| [linkedin.com](https://www.linkedin.com/) | Logged out: fingerprinting by two `static.licdn.com` bundles, no probing. BrowserGate's scan was reported on **logged-in** pages — test logged in. |
+
+**Fingerprinting**
+
+| Site | What you'll see |
+|---|---|
+| [fingerprint.com/demo](https://fingerprint.com/demo/) | The commercial FingerprintJS product: 11 APIs across audio, canvas, WebGL, navigator, Intl. |
+| [CreepJS](https://abrahamjuliot.github.io/creepjs/) | Most aggressive open-source fingerprinter: 13 APIs, all five surfaces. Also stress-tests the hardening. |
+| [amiunique.org/fingerprint](https://amiunique.org/fingerprint) | 7 APIs, first-party. |
+| [deviceinfo.me](https://www.deviceinfo.me/) | 10 APIs, first-party. |
+| [amazon.com](https://www.amazon.com/) | Fingerprinting by a **third party** — AWS WAF's bot-challenge script. Shows vendor attribution ("Done by …awswaf.com"). |
+
+**Clean controls** — no badge, no card: [en.wikipedia.org](https://en.wikipedia.org/wiki/Privacy), [bbc.com](https://www.bbc.com/).
+
+**Need a click first** (test in real Chrome): [coveryourtracks.eff.org](https://coveryourtracks.eff.org/) → "Test your browser"; [browserleaks.com/canvas](https://browserleaks.com/canvas); [pixelscan.net](https://pixelscan.net/).
+
+Suggested demo order: browserleaks unprotected → **Protect** → browserleaks blocked → Wikipedia (quiet) → demo page for the Deen Shield moment.
 
 ```sh
 node tools/real-web.mjs --headed https://example.com     # watch a site + print the inference

@@ -15,3 +15,14 @@ Notes
   as "3rd-party". A same-company heuristic would fix the label; the detection is correct.
 - 10,000 events (5,000 probes + 5,000 results) on browserleaks processed in ~9 s wall time
   including the fixed 8 s wait — no visible slowdown.
+
+## Second batch (headless, 8 s dwell)
+
+| Site | Probing | Fingerprinting | Traits |
+|---|---|---|---|
+| abrahamjuliot.github.io/creepjs | none | **yes** — 1st-party `creep.js`, 13 APIs, all 5 surfaces | ethnicity, finance, location |
+| deviceinfo.me | none | **yes** — 1st-party inline, 10 APIs | ethnicity, finance, location |
+| amazon.com | none | **yes** — **3rd-party** AWS WAF challenge script (`*.token.awswaf.com`), 4 APIs (navigator, canvas, webgl) | finance |
+| en.wikipedia.org | none | no | — (clean control) |
+| bbc.com | none | no | — (clean control) |
+| coveryourtracks.eff.org, browserleaks.com/canvas, pixelscan.net | — | needs a click / manual run in real Chrome | |
