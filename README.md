@@ -23,6 +23,7 @@ and neutralises the probes without touching the network or breaking the page.
 
 Plan, architecture and prior-art comparison: [`documents/PLAN.md`](documents/PLAN.md).
 Pitch plan mapped to the judging rubric, demo script and prepared Q&A: [`documents/PITCH.md`](documents/PITCH.md).
+Team to-do before judging, with owners and the demo-video recipe: [`documents/NEXT-STEPS.md`](documents/NEXT-STEPS.md).
 
 ## Run it in your Chrome
 
