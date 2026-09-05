@@ -1,29 +1,213 @@
 {
-  "_comment": "Extension ID → what it is and what being probed for it could reveal. trait must be a key of TRAITS in inference.js, or null for known-but-benign. Seed list; extend from the public BrowserGate ID list.",
-
-  "clogkfmebiojffofnmadeeekpjpppeop": { "name": "Deen Shield (test stand-in)", "trait": "religion", "category": "Islamic content filter" },
-
-  "cjpalhdlnbpafiamejdnhcphjbkeiagm": { "name": "uBlock Origin", "trait": "privacy", "category": "Ad/tracker blocker" },
-  "pkehgijcmpdhfbdbbnkijodmdjhbjlgp": { "name": "Privacy Badger", "trait": "privacy", "category": "Tracker blocker" },
-  "mlomiejdfkolichcflejclcbmpeaniij": { "name": "Ghostery", "trait": "privacy", "category": "Tracker blocker" },
-  "gighmmpiobklfepjocnamgkkbiglidom": { "name": "AdBlock", "trait": "privacy", "category": "Ad blocker" },
-  "cfhdojbkjhnklbpkdaibdccddilifddb": { "name": "Adblock Plus", "trait": "privacy", "category": "Ad blocker" },
-  "bkdgflcldnnnapblkhphbgpggdiikppg": { "name": "DuckDuckGo Privacy Essentials", "trait": "privacy", "category": "Privacy suite" },
-  "ldpochfccmkkmhdbclfhpagapcfdljkj": { "name": "Decentraleyes", "trait": "privacy", "category": "CDN privacy" },
-
-  "hdokiejnpimakedhajhdlcegeplioahd": { "name": "LastPass", "trait": "security", "category": "Password manager" },
-  "aeblfdkhhhdcdjpifhhbdiojplfjncoa": { "name": "1Password", "trait": "security", "category": "Password manager" },
-
-  "nkbihfbeogaeaoehlefnkodbefgpgknn": { "name": "MetaMask", "trait": "finance", "category": "Crypto wallet" },
-  "bmnlcjabgnpnenekpadlanbbkooimhnj": { "name": "Honey", "trait": "finance", "category": "Coupons / shopping" },
-
-  "fmkadmapgofadopljbjfkapdkoienihi": { "name": "React Developer Tools", "trait": "profession", "category": "Developer tool" },
-  "hlepfoohegkhhmjieoechaddaejaokhf": { "name": "Refined GitHub", "trait": "profession", "category": "Developer tool" },
-
-  "kbfnbcaeplbcioakkpcpgfkobkghlhen": { "name": "Grammarly", "trait": null, "category": "Writing assistant" },
-  "dbepggeogbaibhgnhhndojpepiihcmeb": { "name": "Vimium", "trait": null, "category": "Keyboard navigation" },
-  "eimadpbcbfnmbkopoojfekhnkhdbieeh": { "name": "Dark Reader", "trait": null, "category": "Dark mode" },
-  "lpcaedmchfhocbbapmcbpinfpgnhiddi": { "name": "Google Keep", "trait": null, "category": "Notes" },
-  "ghbmnnjooekpmoecnnnilnnbdlolhkhi": { "name": "Google Docs Offline", "trait": null, "category": "Office" },
-  "aapbdbdomjkkjkaonfhkkikfgjllcleb": { "name": "Google Translate", "trait": null, "category": "Translation" }
+  "_comment": "Extension ID → what it is and what being probed for it could reveal. trait must be a key of TRAITS in inference.js, or null for known-but-benign. IDs are real Chrome Web Store IDs (except the test stand-in). Extend from the public BrowserGate ID list.",
+  "clogkfmebiojffofnmadeeekpjpppeop": {
+    "name": "Deen Shield (test stand-in)",
+    "trait": "religion",
+    "category": "Islamic content filter"
+  },
+  "cjpalhdlnbpafiamejdnhcphjbkeiagm": {
+    "name": "uBlock Origin",
+    "trait": "privacy",
+    "category": "Ad/tracker blocker"
+  },
+  "pkehgijcmpdhfbdbbnkijodmdjhbjlgp": {
+    "name": "Privacy Badger",
+    "trait": "privacy",
+    "category": "Tracker blocker"
+  },
+  "mlomiejdfkolichcflejclcbmpeaniij": {
+    "name": "Ghostery",
+    "trait": "privacy",
+    "category": "Tracker blocker"
+  },
+  "gighmmpiobklfepjocnamgkkbiglidom": {
+    "name": "AdBlock",
+    "trait": "privacy",
+    "category": "Ad blocker"
+  },
+  "cfhdojbkjhnklbpkdaibdccddilifddb": {
+    "name": "Adblock Plus",
+    "trait": "privacy",
+    "category": "Ad blocker"
+  },
+  "bkdgflcldnnnapblkhphbgpggdiikppg": {
+    "name": "DuckDuckGo Privacy Essentials",
+    "trait": "privacy",
+    "category": "Privacy suite"
+  },
+  "ldpochfccmkkmhdbclfhpagapcfdljkj": {
+    "name": "Decentraleyes",
+    "trait": "privacy",
+    "category": "CDN privacy"
+  },
+  "hdokiejnpimakedhajhdlcegeplioahd": {
+    "name": "LastPass",
+    "trait": "security",
+    "category": "Password manager"
+  },
+  "aeblfdkhhhdcdjpifhhbdiojplfjncoa": {
+    "name": "1Password",
+    "trait": "security",
+    "category": "Password manager"
+  },
+  "nkbihfbeogaeaoehlefnkodbefgpgknn": {
+    "name": "MetaMask",
+    "trait": "finance",
+    "category": "Crypto wallet"
+  },
+  "bmnlcjabgnpnenekpadlanbbkooimhnj": {
+    "name": "Honey",
+    "trait": "finance",
+    "category": "Coupons / shopping"
+  },
+  "fmkadmapgofadopljbjfkapdkoienihi": {
+    "name": "React Developer Tools",
+    "trait": "profession",
+    "category": "Developer tool"
+  },
+  "hlepfoohegkhhmjieoechaddaejaokhf": {
+    "name": "Refined GitHub",
+    "trait": "profession",
+    "category": "Developer tool"
+  },
+  "kbfnbcaeplbcioakkpcpgfkobkghlhen": {
+    "name": "Grammarly",
+    "trait": null,
+    "category": "Writing assistant"
+  },
+  "dbepggeogbaibhgnhhndojpepiihcmeb": {
+    "name": "Vimium",
+    "trait": null,
+    "category": "Keyboard navigation"
+  },
+  "eimadpbcbfnmbkopoojfekhnkhdbieeh": {
+    "name": "Dark Reader",
+    "trait": null,
+    "category": "Dark mode"
+  },
+  "lpcaedmchfhocbbapmcbpinfpgnhiddi": {
+    "name": "Google Keep",
+    "trait": null,
+    "category": "Notes"
+  },
+  "ghbmnnjooekpmoecnnnilnnbdlolhkhi": {
+    "name": "Google Docs Offline",
+    "trait": null,
+    "category": "Office"
+  },
+  "aapbdbdomjkkjkaonfhkkikfgjllcleb": {
+    "name": "Google Translate",
+    "trait": null,
+    "category": "Translation"
+  },
+  "ofhlminijomemliahkjjbgcbfoimjiaj": {
+    "name": "PordaAI",
+    "trait": "religion",
+    "category": "Islamic content filter (named in BrowserGate)"
+  },
+  "dknbcbplnobgkbiojdbomdpincgddhgc": {
+    "name": "Haram Police",
+    "trait": "religion",
+    "category": "Islamic content filter"
+  },
+  "ahjfcjffeiagkjjikopfmjhknamhpjcc": {
+    "name": "Haram Shield",
+    "trait": "religion",
+    "category": "Islamic content filter"
+  },
+  "ffcbndjmpndbajnjcdbnbbmakmaflmok": {
+    "name": "Haram Block",
+    "trait": "religion",
+    "category": "Islamic content filter"
+  },
+  "bhdanmebljchnckgnpmpokphhkphccab": {
+    "name": "Darajah",
+    "trait": "religion",
+    "category": "Prayer times / Hijri"
+  },
+  "eglgbgmahngnflijjdhghhdbflgdceif": {
+    "name": "Salah - Prayer Reminder",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "clleaebafhiakcbmcileobejadepdfam": {
+    "name": "Muslim Reminder",
+    "trait": "religion",
+    "category": "Prayer times / Quran"
+  },
+  "iihakgeicjcncinhnmlhbikhfddeeheb": {
+    "name": "Muslim Prayer Times",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "nnodjoflkancadckoeanboggookcefan": {
+    "name": "Pryym - Muslim Prayer Times",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "ghgdhmklmlocjpfieabjjdeblledleoo": {
+    "name": "Prayer Times Pro",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "abdmibnfefhnpmcjbekbdlmhfhajfdkb": {
+    "name": "Prayer Times - Salaat",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "mfpccgpbmpdchnodfnacjgjgdkdldohe": {
+    "name": "Hijri Cal",
+    "trait": "religion",
+    "category": "Hijri calendar"
+  },
+  "holffmmbcpgclchdiogmlflljalffodl": {
+    "name": "Prayer Times - Islamic New Tab",
+    "trait": "religion",
+    "category": "Prayer times"
+  },
+  "kdjbmnmfppgifnpaoediclncglnogihe": {
+    "name": "Purity Guard",
+    "trait": "religion",
+    "category": "Faith-based content filter"
+  },
+  "jnieodplenkcebnilenbfbmgchinkmlf": {
+    "name": "Browser Bible",
+    "trait": "religion",
+    "category": "Bible"
+  },
+  "ccdlfnlcdkjjcjdiidgghcgeadghfbdp": {
+    "name": "YouVersion Search",
+    "trait": "religion",
+    "category": "Bible"
+  },
+  "dailoclceloffimldmdadnghcjbfkjil": {
+    "name": "Bible Verses Daily",
+    "trait": "religion",
+    "category": "Bible"
+  },
+  "khknjdjihianlbkkbpmoemlkphkeaddi": {
+    "name": "Bible Previewer",
+    "trait": "religion",
+    "category": "Bible"
+  },
+  "fkmibejcfnaoglanjfceecmljgkjaici": {
+    "name": "Bible Gateway Darkmode",
+    "trait": "religion",
+    "category": "Bible"
+  },
+  "cdnapgfjopgaggbmfgbiinmmbdcglnam": {
+    "name": "OpenDyslexic for Chrome",
+    "trait": "health",
+    "category": "Dyslexia font"
+  },
+  "ahmapmilbkfamljbpgphfndeemhnajme": {
+    "name": "Helperbird",
+    "trait": "health",
+    "category": "Accessibility / dyslexia support"
+  },
+  "gflobokeglbgdhdelipppigfncpnfgbh": {
+    "name": "Dyslexic Browser",
+    "trait": "health",
+    "category": "Dyslexia support"
+  }
 }

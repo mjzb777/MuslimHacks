@@ -99,7 +99,11 @@ function inferProbes(events, extensionMap) {
     attempts: list.reduce((n, t) => n + t.attempts, 0),
     blocked: list.reduce((n, t) => n + t.blocked, 0),
     found: list.filter((t) => t.found).length,
-    targets: list.sort((a, b) => RANK[TRAITS[b.trait]?.sensitivity] - RANK[TRAITS[a.trait]?.sensitivity] || 0),
+    // Most sensitive first, then found-on-this-browser, then by name. Untagged rank 0.
+    targets: list.sort((a, b) =>
+      (RANK[TRAITS[b.trait]?.sensitivity] ?? 0) - (RANK[TRAITS[a.trait]?.sensitivity] ?? 0) ||
+      Number(b.found) - Number(a.found) ||
+      (a.name ?? a.id).localeCompare(b.name ?? b.id)),
     traits,
   };
 }

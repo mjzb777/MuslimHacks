@@ -38,7 +38,14 @@ test("mixed probes aggregate by trait and sort high → low", () => {
   assert.equal(r.probes.unknown, 0);
   const order = r.traits.map((t) => t.sensitivity);
   assert.deepEqual(order, [...order].sort((a, b) => ({ high: 3, medium: 2, low: 1 })[b] - ({ high: 3, medium: 2, low: 1 })[a]));
-  assert.equal(r.traits[0].trait, "religion");
+  assert.equal(r.traits[0].sensitivity, "high");
+  const high = r.traits.filter((t) => t.sensitivity === "high").map((t) => t.trait);
+  assert.ok(high.includes("religion") && high.includes("health"), `high traits: ${high}`);
+  const religion = r.traits.find((t) => t.trait === "religion");
+  assert.ok(religion.evidence.includes("PordaAI"));
+  // Probed-target list leads with the most sensitive extensions, untagged ones last.
+  assert.equal(r.probes.targets[0].trait && TRAITS[r.probes.targets[0].trait].sensitivity, "high");
+  assert.equal(r.probes.targets.at(-1).trait, null);
   const privacy = r.traits.find((t) => t.trait === "privacy");
   assert.ok(privacy.evidence.includes("uBlock Origin"));
   assert.ok(privacy.evidence.length >= 5);

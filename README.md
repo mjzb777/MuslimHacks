@@ -22,6 +22,7 @@ calls themselves, so it sees first-party scans, tells you *what the site tried t
 and neutralises the probes without touching the network or breaking the page.
 
 Plan, architecture and prior-art comparison: [`documents/PLAN.md`](documents/PLAN.md).
+Pitch plan mapped to the judging rubric, demo script and prepared Q&A: [`documents/PITCH.md`](documents/PITCH.md).
 
 ## Run it in your Chrome
 
@@ -59,7 +60,7 @@ All verified with the extension loaded (details in
 
 | Site | What you'll see |
 |---|---|
-| [browserleaks.com/chrome](https://browserleaks.com/chrome) | Probes **5,000** extension IDs. Badge lights up; with Protect on, all 5,000 are blocked and the page's own list comes back empty. Best live demo of prevention at scale. |
+| [browserleaks.com/chrome](https://browserleaks.com/chrome) | Probes **5,000** extension IDs — including **PordaAI** (the Islamic extension named in BrowserGate) and three dyslexia tools, so the card shows *Religion* and *Health* on a real site. With Protect on, all 5,000 are blocked and the page's own list comes back empty. Best live demo. |
 | The demo page (`npm run demo`) | 20 probes including the fake Deen Shield → *Religion* listed first. |
 | [linkedin.com](https://www.linkedin.com/) | Logged out: fingerprinting by two `static.licdn.com` bundles, no probing. BrowserGate's scan was reported on **logged-in** pages — test logged in. |
 
@@ -123,9 +124,13 @@ Nothing network-level is blocked.
 ```sh
 npm install && npx playwright install chromium
 npm test            # 14 unit tests — pure inference logic, milliseconds
+npm run coverage    # same, with coverage: inference.js 97.6% lines / 95.6% branches / 92.6% functions
 npm run e2e         # 15 end-to-end tests in real Chromium with both extensions loaded,
                     # including the before/after prevention proof (found: 1 → 0)
+npm run perf        # page-load overhead: +6 ms median (84 → 90 ms, n=7) on the demo page
 ```
+
+Numbers above measured Sept 5 on the dev machine; rerun the commands to refresh them.
 
 `tests/manual-checklist.md` is the real-Chrome checklist to run before a demo: positive
 checks on tracking sites, and "does Gmail / YouTube / checkout still work with protection on".
