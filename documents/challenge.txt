@@ -1,1 +1,35 @@
-placeholder
+PPLUS challenge 03
+
+Online Privacy
+Use technology to help people detect, understand, and prevent the unauthorized collection and use of their personal data online.
+
+The problem
+
+Online tracking is no longer just about cookies. Websites can collect information through hidden scripts, browser fingerprinting, extension probing and other techniques that are difficult for users to see or stop. The LinkedIn BrowserGate case shows why this matters: LinkedIn was found probing thousands of Chrome extensions and collecting device characteristics. The scan included Islamic extensions such as Deen Shield and PordaAI, showing how this data could potentially reveal sensitive traits such as religion. LinkedIn disputes that it used the data for this purpose. The core problem is visibility and control: users often do not know what is being collected, what it can reveal about them or how to stop it.
+
+How it works today
+
+Tools such as uBlock Origin, Ghostery and Privacy Badger block many known trackers, while browsers such as Brave, Firefox and Safari provide additional privacy protections. However, these tools often depend on known domains or predefined rules. They may block something without explaining what happened and can miss newer techniques such as fingerprinting or disguised third-party tracking. Research tools such as Blacklight and OpenWPM provide deeper visibility, but are mainly designed for technical users.
+
+Where to focus
+
+Make tracking understandable: show what data was collected, who received it and what it could reveal.
+Detect hidden behaviour: look beyond lists of known trackers for fingerprinting, extension probing, unusual scripts or hidden data flows.
+Move from detection to prevention: help users stop or limit unwanted collection, not only report that it happened.
+Design for ordinary users: a non-technical person should understand the risk and know what action to take.
+Important constraints
+
+Do not create another privacy problem. Collect as little user data as possible and prefer local processing.
+Do not break the web unnecessarily. Blocking everything is not useful if websites stop functioning.
+Test prevention, not only detection. Show that the solution actually reduces or stops the unwanted collection.
+If building a Chrome extension, make sure your approach works within Manifest V3 restrictions.
+Before you build
+
+What can your tool detect that existing privacy tools or browser developer tools cannot?
+Can a non-technical person understand what is happening and what to do about it?
+Does it actually prevent or reduce unwanted data collection?
+Can it protect the user without unnecessarily breaking websites?
+Does it provide enough value for users to justify using it?
+What to deliver
+
+A working MVP demonstrating one core workflow.
