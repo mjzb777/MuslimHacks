@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Unseen — see what sites try to learn about you",
+  "version": "0.1.0",
+  "description": "Detects when a website probes your installed extensions or fingerprints your browser, explains what that could reveal about you, and lets you stop it on that site.",
+  "permissions": ["storage", "scripting", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "background/sw.js", "type": "module" },
+  "action": { "default_popup": "popup/popup.html", "default_title": "Unseen" },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["main/detector.js"],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
+    },
+    {
+      "matches": ["<all_urls>"],
+      "js": ["isolated/bridge.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

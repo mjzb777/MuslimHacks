@@ -1,0 +1,16 @@
+{
+  "name": "muslimhacks-online-privacy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MuslimHacks 2026 — Challenge 03 (Online Privacy). MV3 extension that detects extension probing and fingerprinting, explains what it could reveal, and stops it.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\"",
+    "e2e": "node --test \"tests/e2e/*.test.js\"",
+    "demo": "node tools/serve-demo.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

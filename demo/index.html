@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>BrowserGate demo page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+  body { max-width: 760px; margin: 2rem auto; padding: 0 1rem; line-height: 1.45; }
+  h1 { font-size: 1.4rem; }
+  .readout { font-family: ui-monospace, Consolas, monospace; background: #0001; padding: .75rem 1rem; border-radius: 6px; white-space: pre-wrap; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  td, th { text-align: left; padding: .25rem .5rem; border-bottom: 1px solid #0002; }
+  .found { color: #c00; font-weight: 600; }
+  .miss { color: #888; }
+  small { color: #777; }
+</style>
+</head>
+<body>
+<h1>"Totally normal website" — BrowserGate demo</h1>
+<p>This page does what LinkedIn's bundle was found doing: it probes for installed extensions and takes a device fingerprint. Nothing is sent anywhere — it just prints what it learned, so you can see what a site <em>could</em> know.</p>
+
+<h2>Readout</h2>
+<div class="readout" id="readout">running…</div>
+
+<h2>Extension probe</h2>
+<table id="probe"><thead><tr><th>Extension</th><th>ID</th><th>&lt;img&gt;</th><th>fetch()</th><th>Result</th></tr></thead><tbody></tbody></table>
+
+<h2>Fingerprint</h2>
+<div class="readout" id="fp">…</div>
+<p><small>Results also exposed on <code>window.__demoResults</code> for automated tests.</small></p>
+
+<script type="module">
+  import { runProbe, TARGETS } from "./probe.js";
+  import { runFingerprint } from "./fingerprint.js";
+
+  const readout = document.getElementById("readout");
+  const tbody = document.querySelector("#probe tbody");
+  const fpEl = document.getElementById("fp");
+
+  function render(results) {
+    tbody.innerHTML = results.map(r => `
+      <tr>
+        <td>${r.name}</td>
+        <td><code>${r.id}</code></td>
+        <td>${r.img ? "✓" : "✗"}</td>
+        <td>${r.fetched ? "✓" : "✗"}</td>
+        <td class="${r.found ? "found" : "miss"}">${r.found ? "INSTALLED" : "not found"}</td>
+      </tr>`).join("");
+  }
+
+  const t0 = performance.now();
+  const probe = await runProbe(render);
+  const fp = await runFingerprint();
+  const ms = Math.round(performance.now() - t0);
+
+  const found = probe.filter(r => r.found);
+  window.__demoResults = { probed: probe.length, found: found.length, foundIds: found.map(r => r.id), fingerprint: fp, ms };
+
+  readout.textContent =
+    `extensions probed: ${probe.length}   found: ${found.length}` +
+    (found.length ? ` (${found.map(r => r.name).join(", ")})` : "") +
+    `\ncanvas: ${fp.canvas}   audio: ${fp.audio}   combined: ${fp.combined}   (${ms} ms)`;
+
+  fpEl.textContent = JSON.stringify(fp, null, 2);
+</script>
+</body>
+</html>

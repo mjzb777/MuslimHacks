@@ -1,0 +1,9 @@
+node_modules/
+.playwright-profile/
+*.pem
+*.log
+.DS_Store
+Thumbs.db
+.claude/
+# 31 MB challenge booklet — keep local, not in history
+documents/*.pdf

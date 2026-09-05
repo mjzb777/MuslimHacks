@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Deen Shield (test stand-in)",
+  "version": "0.1.0",
+  "description": "Fake target extension for the demo. Exposes one web-accessible resource so a BrowserGate-style probe has something real to find. Does nothing else.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvAcTPeqA8vvOkp7Vpctv6nDMOE6hxxNWuAB5NjDK4dXh4ygQFQbW3tutiNnQooI+ZdtWs7OStYaV0HP82GBmQWvhmmzkM4dYDV5UfkiooFXHgJzcOpKzv1l8PCczFBJRevHkFYMnuV6Qw/z7hVbZPH9FZarPg4zuEvXS7f218o9nbufKxAKqRtLOEh8pLRBgLX0waUL23m6T+ezDjF6zv8jxySwWOAMfVai853zzNblfkVSkJILvhot6KqMl4UGi9y2HO+xmxBil63gOZWPMspJ1e+EoNwObmZ+lOisLF+2sHbUPxbLDosZNwmNl+lAnam60G/auB8t+3Cr8cLlLPwIDAQAB",
+  "icons": { "128": "marker.png" },
+  "web_accessible_resources": [
+    {
+      "resources": ["marker.png"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
