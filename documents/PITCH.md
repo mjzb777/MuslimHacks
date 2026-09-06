@@ -23,6 +23,8 @@ Rubric weights: **Business 40% · Delivery 30% · Technical 30%**, each line gra
 | Process for arriving at solution       | Tech   | PLAN.md: brief → prior art → "what nobody does" → one workflow → steps with done-checks                                                                             | Tell it as a decision story, not a timeline.                                             |
 
 
+
+
 ## 2. Product changes that move scores (do these first)
 
 1. **Religion row on a real site.** browserleaks.com/chrome probes PordaAI's real ID — the
@@ -34,6 +36,8 @@ Rubric weights: **Business 40% · Delivery 30% · Technical 30%**, each line gra
 4. **Architecture slide** (mermaid below → export PNG).
 5. Nice-to-have if time: a history page listing sites seen + protected (data already in
   `chrome.storage.local.sites`). Makes "comprehensive" and "easy to use" more tangible.
+
+
 
 ## 3. Demo script (2 min, one driver, one speaker)
 
@@ -48,6 +52,20 @@ Rubric weights: **Business 40% · Delivery 30% · Technical 30%**, each line gra
 | 1:40 | "Everything ran on this laptop. No server, no account, no LLM. 15 end-to-end tests prove the before and after."                                                                                                                            | `npm run e2e` already running in a terminal — show green.                                                                                       |
 | 1:55 | "Unseen: the first tool that tells an ordinary person what a site tried to learn about them, and stops it."                                                                                                                                | Slide: name + one line                                                                                                                          |
 
+
+++**Text Presentation:**++
+
+In April 2026, the BrowserGate investigation scandal was published by Fairlinked eV, revealing that over 5000 browser extensions and softwares were scanned by hidden LinkedIn code and was sent to other servers or third party firms. Such information can be used for indirect user profiling. Unfortunately, such security breaches have been apparently taking place on some other websites. 
+
+Knowing such information, many of you may already feel more paranoid about their internet usage, to whom we tell: fear not, as we have a solution to keep what’s private unseen.
+
+Unseen is a Chrome extension that works to protect your device's privacy every time you open a new tab.
+
+When opening a new website, Unseen does a quick automated check and detect any potential security breach using over 6,000 extension ID and pattern recognition. Each extension is categorised. Once detected, the user is informed of what specific information was being collected, and if they would wish to block the website's access. 
+
+Unseen also blocks third parties from recognising your device and recording specific data attached to it. Every call to record any information related to the device will pass through our extension, and if any specific information is detected, it answers with randomised values or with fixed unique value for each user. 
+
+Our demo now stands at exactly 43 extensions categorized into 12 different sources for sensitive information...
 
 ## 4. Follow-up questions — prepared answers
 
@@ -151,6 +169,8 @@ PordaAI/Deen Shield teams for the dataset.
 - *Remember most?* "LinkedIn checked if you're Muslim. Now you can see it — and stop it."
 - *Why win?* It answers every constraint in the brief with a working, tested, local-first
 product that demonstrably prevents collection on real sites, not a slide.
+
+
 
 ## 6. What winning hackathon teams do (apply all)
 
