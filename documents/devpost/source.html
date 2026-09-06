@@ -26,7 +26,8 @@
   .toolbar .url::before { content: ""; width: 14px; height: 18px; border: 2px solid var(--faint); border-radius: 3px; }
   .toolbar .ext { position: relative; width: 40px; height: 40px; border-radius: 10px; background: var(--ink); display: grid; place-items: center; }
   .toolbar .ext::before { content: ""; width: 22px; height: 22px; border-radius: 50%; border: 3px solid #fff; }
-  .toolbar .ext::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+  .toolbar .ext::after { content: ""; position: absolute; width: 8px; height: 8px; border-radius: 50%; background: #fff; top: 11px; right: 11px; }
+  .cover .logo { width: 150px; height: 150px; display: block; margin-bottom: 40px; }
   .toolbar .ext i { position: absolute; right: -14px; bottom: -10px; min-width: 30px; height: 30px; padding: 0 8px; border-radius: 8px; background: var(--high); color: #fff; font-style: normal; font-weight: 700; font-size: 19px; display: grid; place-items: center; font-family: var(--body); }
   .toolbar .ext i.medium { background: var(--medium); }
   .toolbar .ext i.none { display: none; }
@@ -92,7 +93,8 @@
 </style>
 
 <!-- 01 cover / thumbnail -->
-<section class="frame cover" id="f1">
+<section class="frame cover" id="f1" data-name="01-cover">
+  <svg class="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#1b2430"/><circle cx="32" cy="32" r="15" fill="none" stroke="#fff" stroke-width="6"/><circle cx="38.5" cy="25.5" r="5.5" fill="#fff"/></svg>
   <h1>Unseen</h1>
   <p class="lede">See what websites try to learn about you. Then stop them.</p>
   <p class="kind"><b>Chrome extension.</b> Everything runs on your device.</p>
@@ -104,7 +106,7 @@
 </section>
 
 <!-- 02 the problem -->
-<section class="frame problem" id="f2">
+<section class="frame problem" id="f2" data-name="02-problem">
   <h1>LinkedIn checked whether you're Muslim.</h1>
   <p class="lede">BrowserGate, April 2026. LinkedIn's own script asked every visitor's browser about <strong>6,222 extensions</strong>. Blockers can't see it: there is no domain to block.</p>
   <div class="probe">
@@ -116,7 +118,7 @@
 </section>
 
 <!-- 03 before / after -->
-<section class="frame ba-frame" id="f3">
+<section class="frame ba-frame" id="f3" data-name="03-before-after">
   <h2>One click. Same site, still works.</h2>
   <div class="ba">
     <div>
@@ -138,7 +140,7 @@
 </section>
 
 <!-- 04 real sites -->
-<section class="frame" id="f4">
+<section class="frame" id="f4" data-name="04-real-sites">
   <h2>Verified on real sites</h2>
   <div class="sites">
     <div class="site"><div class="toolbar"><span class="url">browserleaks.com/chrome</span><span class="ext"><i>6</i></span></div><div class="find"><b>5,000 extension probes,</b> PordaAI and three dyslexia tools among them. Religion and health on a real site.</div></div>
@@ -152,7 +154,7 @@
 </section>
 
 <!-- 05 how it works -->
-<section class="frame" id="f5">
+<section class="frame" id="f5" data-name="05-how-it-works">
   <h2>How it works</h2>
   <div class="arch">
     <div class="node"><div class="t">The page</div><div class="f">site's own JS</div><div class="d">Calls fetch, canvas, WebGL, audio, navigator…</div></div>
@@ -170,7 +172,7 @@
 </section>
 
 <!-- 06 numbers -->
-<section class="frame" id="f6">
+<section class="frame" id="f6" data-name="06-numbers">
   <h2>Tested, measured, local</h2>
   <div class="nums">
     <div class="num"><b>5,000<small> → 0</small></b><span>probes answered on browserleaks, before and after one click</span></div>

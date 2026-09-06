@@ -57,9 +57,22 @@ paste with each:
 | `05-how-it-works.png` | MAIN-world detector → bridge → pure inference → card. Nothing blocked on the network, nothing leaves the device. |
 | `06-numbers.png` | 5,000→0 probes, +6 ms, 97.6 % coverage, 14 unit + 15 e2e tests, 0 servers. |
 
+Brand assets, same folder (`documents/devpost/`):
+
+| File | Use it for |
+|---|---|
+| `logo/mark.svg`, `logo/mark-1024.png` | The mark alone, transparent corners. Devpost "project logo" / any avatar field. |
+| `logo/logo-square-1024.png` | Mark on white with margin, if a field wants a square with no transparency. |
+| `logo/wordmark-light.png`, `logo/wordmark-dark.png` | Mark + "Unseen" lockup on white / on ink. Slides, README, banners. |
+| `thumbnail-3x2.png` (1200×800) | Devpost thumbnail (listing tile). |
+| `preview-square.png` (1200×1200) | Any square preview or social avatar. |
+| `social-1200x630.png` | GitHub repo social preview (Settings → Social preview) and link unfurls. |
+| `store/small-tile-440x280.png`, `store/marquee-1400x560.png` | Chrome Web Store promo images, ready for the listing after the hackathon. |
+| `../../extension/icons/icon16/32/48/128.png` | Extension icons, wired into `manifest.json`. Reload the extension to see the mark in the toolbar. |
+
 Regenerate after any popup change: `node tools/screenshot-popup.mjs documents/devpost/src-card-before.png --zoom 2 https://browserleaks.com/chrome`,
-same with `--protect` into `src-card-after.png`, then `node tools/render-devpost.mjs`.
-Edit the layouts in `documents/devpost/source.html`.
+same with `--protect` into `src-card-after.png`, then `node tools/render-devpost.mjs` (renders
+both `source.html` and `brand.html`; every `[data-name]` element becomes a PNG at its own size).
 
 ## D. How teams make demo videos that look good
 

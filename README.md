@@ -1,3 +1,5 @@
+<img src="documents/devpost/logo/mark.svg" width="64" alt="">
+
 # Unseen — see what websites try to learn about you
 
 **MuslimHacks 2026 · Challenge 03 (Online Privacy)**
@@ -9,9 +11,12 @@ finances — and lets you stop it on that site with one click.
 
 Everything runs on your device. Nothing is sent anywhere.
 
-| Unprotected | Protected |
+| browserleaks.com, unprotected | browserleaks.com, protected |
 |---|---|
-| ![](documents/screens/popup-unprotected.png) | ![](documents/screens/popup-protected.png) |
+| ![](documents/screens/popup-browserleaks.png) | ![](documents/screens/popup-browserleaks-protected.png) |
+
+Devpost gallery images and brand assets (logo, thumbnails, store tiles) live in
+[`documents/devpost/`](documents/devpost/).
 
 ## Why this exists
 
