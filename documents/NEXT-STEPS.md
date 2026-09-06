@@ -28,7 +28,7 @@ hardening → `canvas.getImageData` bit flip → `navigator.*` generics (all in
 |---|---|---|---|
 | B1 | Fill in **"How did you divide the work?"** in `PITCH.md` §5 (Team & process). | | ☐ |
 | B2 | Assign a **question owner** per category in `PITCH.md` §5: Technical · Impact · Demo · Business · Team · Privacy · Future · Closing. Each owner reads their answers until they can say them in ≤ 20 s. | | ☐ |
-| B3 | Slides (≤ 6): 1 BrowserGate headline · 2 "what a site sees" · 3 architecture (mermaid in `PITCH.md` §4, export PNG) · 4 prior art vs. us · 5 numbers (5,000→0 · +6 ms · 97.6% · 15 e2e) · 6 name + one line + ask. | | ☐ |
+| B3 | Slides + tab lineup: follow [`PRESENTATION.md`](PRESENTATION.md) (8 slides, 5-tab live demo, pre-flight checklist, failure fallbacks, 3-minute cut). | | ☐ |
 | B4 | Choose driver (mouse) and speaker (voice). Third person runs `npm run e2e` in a visible terminal 30 s before the demo. | | ☐ |
 | B5 | Rehearse the 2-minute script (`PITCH.md` §3) **three times** on the actual laptop, actual Wi-Fi, timer running. | | ☐ |
 | B6 | Decide the offline fallback order: demo page (`npm run demo`) → backup video. | | ☐ |

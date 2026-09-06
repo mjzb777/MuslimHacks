@@ -1,0 +1,450 @@
+<title>Unseen Pitch Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff;
+    --ink: #1b2430;
+    --muted: #6b7380;
+    --faint: #a3aab4;
+    --line: #e3e6ea;
+    --wash: #f4f5f7;
+    --high: #c62828;
+    --medium: #ef6c00;
+    --ok: #2e7d32;
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Instrument Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    overflow: hidden;
+  }
+  ::selection { background: #fbe4e4; }
+
+  /* stage: a fixed 1920×1080 canvas scaled to fit the viewport */
+  .deck { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); }
+  .stage { width: 1920px; height: 1080px; position: relative; transform-origin: center; }
+  .slide {
+    position: absolute; inset: 0;
+    padding: 140px 160px 120px;
+    display: none;
+    grid-template-rows: 1fr auto;
+    font-size: 30px;
+    line-height: 1.4;
+  }
+  .slide.current { display: grid; }
+  .slide > .body { display: grid; align-content: center; min-height: 0; }
+  .slide > .foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    color: var(--faint); font-size: 22px; padding-top: 40px;
+  }
+  .slide > .foot .n { font-variant-numeric: tabular-nums; }
+
+  h1, h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 { font-size: 132px; }
+  h2 { font-size: 84px; }
+  p { margin: 0; max-width: 34ch; }
+  .lede { font-size: 40px; line-height: 1.3; color: var(--muted); max-width: 30ch; }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .stack { display: grid; gap: 44px; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 120px; align-items: center; }
+  .mono { font-family: var(--mono); font-size: 0.8em; }
+  .red { color: var(--high); }
+  .green { color: var(--ok); }
+
+  /* 1 · hook */
+  .probe {
+    font-family: var(--mono); font-size: 26px; color: var(--muted);
+    display: grid; grid-template-columns: auto 1fr; column-gap: 28px; row-gap: 10px; align-items: baseline;
+    border-left: 4px solid var(--high); padding-left: 32px;
+  }
+  .probe .k { color: var(--faint); }
+  .probe .id { color: var(--ink); }
+  .probe .hit { color: var(--high); font-family: var(--body); font-size: 28px; font-weight: 600; }
+
+  /* 2 · two worlds */
+  .worlds { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; }
+  .world h3 { font-family: var(--display); font-weight: 600; font-size: 48px; letter-spacing: -0.02em; margin: 0 0 28px; line-height: 1.1; }
+  .world p { color: var(--muted); font-size: 30px; max-width: 26ch; }
+  .flow { display: grid; gap: 14px; margin: 40px 0 36px; font-family: var(--mono); font-size: 25px; }
+  .flow div { display: flex; align-items: center; gap: 22px; }
+  .flow .site { color: var(--ink); }
+  .flow .arrow { color: var(--faint); }
+  .flow .dom { color: var(--muted); }
+  .flow .x { color: var(--ok); font-family: var(--body); font-weight: 600; }
+  .flow .api { color: var(--high); }
+  .flow .none { color: var(--faint); font-family: var(--body); font-style: italic; }
+
+  /* 3 & 9 · the card, rebuilt */
+  .card {
+    width: 560px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
+    padding: 22px 26px 26px; font-size: 21px; line-height: 1.42; color: var(--ink);
+    box-shadow: 0 30px 70px -30px rgba(27, 36, 48, .25);
+    justify-self: end;
+  }
+  .card header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; }
+  .card header b { font-size: 22px; }
+  .card header span { color: var(--muted); font-size: 18px; }
+  .card .box { background: var(--wash); border-radius: 10px; padding: 14px 18px; }
+  .card .box .hl { font-weight: 600; font-size: 22px; margin-bottom: 6px; }
+  .card .box .by { color: var(--muted); font-size: 18px; margin-top: 8px; }
+  .card h4 { font-size: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 20px 0 8px; font-weight: 600; }
+  .card .trait { display: grid; grid-template-columns: 14px 1fr; gap: 14px; padding: 9px 0; border-top: 1px solid var(--line); }
+  .card .trait:first-child { border-top: 0; }
+  .card .dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 8px; background: var(--faint); }
+  .card .dot.high { background: var(--high); } .card .dot.medium { background: var(--medium); }
+  .card .trait b { display: block; }
+  .card .trait small { color: var(--muted); font-size: 18px; }
+  .card .btn { margin-top: 18px; border-radius: 10px; padding: 15px; text-align: center; color: #fff; font-weight: 600; background: var(--high); }
+  .card .btn.on { background: var(--ok); }
+  .card .foot { margin-top: 14px; font-size: 16px; color: var(--muted); }
+  .card .learned { font-weight: 600; }
+
+  .verbs { display: grid; gap: 34px; }
+  .verb { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: baseline; }
+  .verb b { font-family: var(--display); font-size: 56px; font-weight: 600; letter-spacing: -0.02em; }
+  .verb p { color: var(--muted); max-width: 24ch; }
+
+  /* 4 · live demo tabs */
+  .tabs { display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .tab { display: grid; grid-template-columns: 90px 620px 1fr; gap: 40px; align-items: baseline; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .tab .n { font-family: var(--display); font-size: 40px; font-weight: 600; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .tab .url { font-family: var(--mono); font-size: 28px; }
+  .tab .what { color: var(--muted); font-size: 28px; }
+  .badge { display: inline-block; width: 18px; height: 18px; border-radius: 50%; vertical-align: -1px; margin-right: 14px; background: var(--faint); }
+  .badge.high { background: var(--high); } .badge.medium { background: var(--medium); } .badge.ok { background: var(--ok); }
+
+  /* 5 · architecture */
+  .arch { display: grid; grid-template-columns: repeat(5, 1fr); align-items: start; column-gap: 0; margin: 20px 0 70px; }
+  .node { position: relative; padding-right: 48px; }
+  .node + .node::before { content: "→"; position: absolute; left: -40px; top: -2px; font-size: 30px; color: var(--faint); }
+  .node .t { font-family: var(--display); font-weight: 600; font-size: 34px; letter-spacing: -0.015em; line-height: 1.1; }
+  .node .f { font-family: var(--mono); font-size: 21px; color: var(--muted); margin: 8px 0 14px; }
+  .node .d { font-size: 22px; color: var(--muted); line-height: 1.35; max-width: 24ch; }
+  .node.hot .t { color: var(--high); }
+  .callouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; border-top: 1px solid var(--line); padding-top: 40px; }
+  .callouts b { display: block; font-family: var(--display); font-size: 36px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 8px; }
+  .callouts p { color: var(--muted); font-size: 26px; }
+
+  /* 6 · comparison */
+  table { border-collapse: collapse; width: 100%; font-size: 30px; }
+  th, td { text-align: left; padding: 26px 24px 26px 0; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+  th { font-weight: 500; color: var(--muted); font-size: 26px; }
+  td:first-child { font-weight: 600; width: 34%; }
+  td:not(:first-child), th:not(:first-child) { text-align: center; padding-right: 0; }
+  tr.us td { color: var(--ink); }
+  tr.us td:first-child { color: var(--high); }
+  .yes { color: var(--ok); font-weight: 600; }
+  .part { color: var(--medium); font-weight: 600; }
+  .no { color: var(--faint); }
+
+  /* 7 · numbers */
+  .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 90px 80px; }
+  .num b { display: block; font-family: var(--display); font-size: 128px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .num b small { font-size: 0.5em; letter-spacing: -0.02em; font-weight: 500; }
+  .num span { display: block; color: var(--muted); font-size: 28px; margin-top: 16px; max-width: 22ch; }
+
+  /* 8 · business */
+  .cols.biz { align-items: start; }
+  .biz h3 { font-family: var(--display); font-weight: 600; font-size: 52px; letter-spacing: -0.02em; margin: 0 0 20px; line-height: 1.08; }
+  .biz p { color: var(--muted); font-size: 30px; max-width: 26ch; }
+  .biz .price { font-family: var(--display); font-size: 40px; font-weight: 600; margin-top: 30px; }
+  .next { border-top: 1px solid var(--line); margin-top: 80px; padding-top: 40px; display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: 60px; align-items: baseline; }
+  .next .k { color: var(--muted); font-size: 26px; }
+  .next div b { font-family: var(--display); font-size: 36px; font-weight: 600; color: var(--faint); margin-right: 18px; }
+
+  /* 9 · close */
+  .close h1 { font-size: 150px; }
+  .close .url { font-family: var(--mono); font-size: 30px; color: var(--muted); margin-top: 48px; }
+
+  /* speaker notes */
+  .notes {
+    position: fixed; left: 0; right: 0; bottom: 0; padding: 28px 48px;
+    background: var(--ink); color: #fff; font-size: 22px; line-height: 1.45;
+    display: none; z-index: 10;
+  }
+  .notes[data-on] { display: block; }
+  .notes .t { color: #ffb4b4; font-weight: 600; margin-right: 18px; }
+  .help {
+    position: fixed; right: 20px; bottom: 16px; z-index: 5;
+    color: var(--faint); font-size: 13px; opacity: .8;
+  }
+  .help kbd { font-family: inherit; border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; margin: 0 2px; }
+  .help[hidden] { display: none; }
+
+  :focus-visible { outline: 3px solid var(--high); outline-offset: 4px; }
+
+  @media print {
+    body { overflow: visible; }
+    .deck { position: static; display: block; }
+    .stage { transform: none !important; width: 1920px; height: 1080px; page-break-after: always; }
+    .slide { display: grid !important; position: relative; }
+    .help, .notes { display: none !important; }
+    @page { size: 1920px 1080px; margin: 0; }
+  }
+</style>
+
+<div class="deck">
+<div class="stage" id="stage">
+
+<!-- 1 · hook -->
+<section class="slide current" data-notes="In April LinkedIn was caught probing 6,000 extensions on every visitor — including PordaAI, an Islamic content filter. If it's installed, they know your religion. No blocker stops this: it's LinkedIn's own code.">
+  <div class="body stack">
+    <h1>LinkedIn checked whether you're Muslim.</h1>
+    <p class="lede">BrowserGate, April 2026. LinkedIn's own script asked every visitor's browser about <strong>6,222 extensions</strong>. One of them was PordaAI, an Islamic content filter.</p>
+    <div class="probe">
+      <span class="k">request</span><span><span class="id">chrome-extension://ofhlminijomemliahkjjbgcbfoimjiaj/</span>…</span>
+      <span class="k">answer</span><span class="hit">installed — PordaAI, Islamic content filter</span>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">1 / 9</span></div>
+</section>
+
+<!-- 2 · why nothing catches it -->
+<section class="slide" data-notes="Every tool you've heard of works on domains. This is the site's own script calling browser APIs. There's nothing to block — and nobody tells you it happened.">
+  <div class="body stack">
+    <h2>Nothing you have installed can see this.</h2>
+    <div class="worlds">
+      <div class="world">
+        <h3>Blockers work on domains</h3>
+        <div class="flow">
+          <div><span class="site">linkedin.com</span><span class="arrow">→</span><span class="dom">doubleclick.net</span><span class="x">blocked</span></div>
+          <div><span class="site">linkedin.com</span><span class="arrow">→</span><span class="dom">scorecardresearch.com</span><span class="x">blocked</span></div>
+        </div>
+        <p>uBlock Origin, Privacy Badger and Ghostery stop requests to known third-party trackers. That is all they can see.</p>
+      </div>
+      <div class="world">
+        <h3>Probing is the site's own code</h3>
+        <div class="flow">
+          <div><span class="site">linkedin.com</span><span class="arrow">→</span><span class="api">fetch("chrome-extension://…")</span></div>
+          <div><span class="site">linkedin.com</span><span class="arrow">→</span><span class="api">canvas.toDataURL()</span></div>
+          <div><span class="none">no domain to block</span></div>
+        </div>
+        <p>First-party JavaScript calling browser APIs. Nothing crosses the network, so nothing is blocked — and nobody tells you it happened.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">2 / 9</span></div>
+</section>
+
+<!-- 3 · unseen in one sentence -->
+<section class="slide" data-notes="Unseen watches the API calls themselves, tells you in plain words what the site tried to learn, and stops it with one click. Let me show you on real sites.">
+  <div class="body cols">
+    <div class="stack">
+      <h2>Unseen watches the calls themselves.</h2>
+      <div class="verbs">
+        <div class="verb"><b>Detect</b><p>Every probe and fingerprint, first party or vendor, before the page script runs.</p></div>
+        <div class="verb"><b>Explain</b><p>What the site tried to learn about you, in plain words.</p></div>
+        <div class="verb"><b>Prevent</b><p>One click, this site only. The page keeps working.</p></div>
+      </div>
+    </div>
+    <div class="card" aria-label="Unseen card on browserleaks.com">
+      <header><b>Unseen</b><span>browserleaks.com</span></header>
+      <div class="box">
+        <div class="hl">This site checked which extensions you have installed.</div>
+        It looked for <b>5,000 extensions</b>, including PordaAI, Helperbird and OpenDyslexic.
+        <div class="by">Done by the site's own code.</div>
+      </div>
+      <h4>What it could reveal about you</h4>
+      <div class="box">
+        <div class="trait"><i class="dot high"></i><div><b>Religion</b><small>probed for PordaAI</small></div></div>
+        <div class="trait"><i class="dot high"></i><div><b>Health or disability</b><small>probed for Helperbird, OpenDyslexic and Dyslexic Browser</small></div></div>
+        <div class="trait"><i class="dot medium"></i><div><b>Financial situation</b><small>probed for Honey</small></div></div>
+        <div class="trait"><i class="dot medium"></i><div><b>Security setup</b><small>probed for LastPass and 1Password</small></div></div>
+      </div>
+      <div class="btn">Protect me on this site</div>
+      <div class="foot">Everything shown here was computed on your device. Nothing is sent anywhere.</div>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">3 / 9</span></div>
+</section>
+
+<!-- 4 · live demo -->
+<section class="slide" data-notes="Switch to the browser. Tabs left to right. Speaker lines are in PRESENTATION.md §2. Hand the mouse to a judge for the Protect click on browserleaks or the demo page.">
+  <div class="body stack">
+    <h2>Live, on real sites.</h2>
+    <div class="tabs">
+      <div class="tab"><span class="n">1</span><span class="url"><i class="badge high"></i>browserleaks.com/chrome</span><span class="what">5,000 probes, PordaAI among them — then one click</span></div>
+      <div class="tab"><span class="n">2</span><span class="url"><i class="badge"></i>en.wikipedia.org</span><span class="what">quiet — it doesn't cry wolf</span></div>
+      <div class="tab"><span class="n">3</span><span class="url"><i class="badge medium"></i>amazon.com</span><span class="what">fingerprinted by a vendor, and it names them</span></div>
+      <div class="tab"><span class="n">4</span><span class="url"><i class="badge high"></i>fingerprint.com/demo</span><span class="what">the commercial product, every API it touched</span></div>
+      <div class="tab"><span class="n">5</span><span class="url"><i class="badge high"></i>127.0.0.1:8787</span><span class="what">offline page — found 1 → protect → found 0</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">4 / 9</span></div>
+</section>
+
+<!-- 5 · how it works -->
+<section class="slide" data-notes="A MAIN-world script wraps the ~20 APIs a probe or fingerprint has to use and notes which script called them. A pure inference module maps probed IDs to traits and flags fingerprinting when one script touches three API families in five seconds. Protection rewrites probe URLs to a dead extension ID, so the browser itself answers 'not installed' — nothing network-level, nothing breaks.">
+  <div class="body">
+    <h2>How it works</h2>
+    <div class="arch">
+      <div class="node"><div class="t">The page</div><div class="f">site's own JS</div><div class="d">Calls fetch, canvas, WebGL, audio, navigator…</div></div>
+      <div class="node hot"><div class="t">Detector</div><div class="f">main/detector.js</div><div class="d">Wraps those APIs in the page's own world. Notes which script called. Rewrites probes when protecting.</div></div>
+      <div class="node"><div class="t">Bridge</div><div class="f">isolated/bridge.js</div><div class="d">Relays events to the service worker. Nothing else.</div></div>
+      <div class="node"><div class="t">Inference</div><div class="f">background/inference.js</div><div class="d">Pure function. Probed IDs → traits. Three API families in five seconds → fingerprint.</div></div>
+      <div class="node"><div class="t">The card</div><div class="f">popup/</div><div class="d">Plain words. One button. Per-site protection kept in local storage.</div></div>
+    </div>
+    <div class="callouts">
+      <div><b>Manifest V3, natively</b><p>Dynamic content scripts and a module service worker. No remote code.</p></div>
+      <div><b>Nothing blocked on the network</b><p>Probe URLs point at an extension that doesn't exist; the browser itself says "not installed".</p></div>
+      <div><b>Nothing leaves the device</b><p>No server, no account, no model. The extension makes zero requests of its own.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">5 / 9</span></div>
+</section>
+
+<!-- 6 · prior art -->
+<section class="slide" data-notes="Static and JShelter block for experts and break sites. Privacy Badger can't see first-party scans by design. browserleaks is a one-site check. Nobody tells an ordinary person what a site tried to learn about them.">
+  <div class="body stack">
+    <h2>What exists, and what it misses</h2>
+    <table>
+      <thead><tr><th></th><th>Sees the site's own scans</th><th>Says what it could reveal</th><th>Stops it without breaking the site</th><th>Made for non-experts</th></tr></thead>
+      <tbody>
+        <tr><td>JShelter, Static</td><td class="yes">yes</td><td class="no">—</td><td class="part">partly</td><td class="no">—</td></tr>
+        <tr><td>Privacy Badger</td><td class="no">—</td><td class="no">—</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+        <tr><td>browserleaks scanner</td><td class="part">its own page</td><td class="part">lists names</td><td class="no">—</td><td class="no">—</td></tr>
+        <tr class="us"><td>Unseen</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td><td class="yes">yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">6 / 9</span></div>
+</section>
+
+<!-- 7 · numbers -->
+<section class="slide" data-notes="Five thousand probes to zero with one click. Six milliseconds overhead. Ninety-eight percent coverage on the inference module, fifteen end-to-end tests that prove the before and after. Zero servers, zero cost to run.">
+  <div class="body nums">
+    <div class="num"><b>5,000<small> → 0</small></b><span>probes answered on browserleaks, before and after one click</span></div>
+    <div class="num"><b>+6<small> ms</small></b><span>page-load overhead, median of 7 runs</span></div>
+    <div class="num"><b>97.6<small>%</small></b><span>line coverage on the inference module</span></div>
+    <div class="num"><b>14<small> + 15</small></b><span>unit tests and end-to-end tests in real Chromium</span></div>
+    <div class="num"><b>43</b><span>real extension IDs tagged to what they reveal</span></div>
+    <div class="num"><b>0</b><span>servers, accounts, models, requests of our own</span></div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">7 / 9</span></div>
+</section>
+
+<!-- 8 · business -->
+<section class="slide" data-notes="Free and open for individuals; it costs nothing to run. Revenue is on the other side: companies paying to audit whether their own site probes for religion. Next step after today is an unlisted store listing and ten PordaAI users.">
+  <div class="body">
+    <div class="cols biz">
+      <div>
+        <h3>Free for people</h3>
+        <p>Open source, on the Chrome Web Store. It runs on your laptop, so it costs us nothing per user — no server to keep alive.</p>
+        <div class="price">$0, forever</div>
+      </div>
+      <div>
+        <h3>Companies pay for audits</h3>
+        <p>Unseen Audit: the same detector, run against a company's own site, produces a GDPR Article 9 report — "your site probes for religious extensions." Compliance teams pay for that.</p>
+        <div class="price">per site, per audit</div>
+      </div>
+    </div>
+    <div class="next">
+      <span class="k">Next</span>
+      <div><b>1</b>Unlisted store listing, ten PordaAI users</div>
+      <div><b>2</b>Dataset from all 6,222 BrowserGate IDs</div>
+      <div><b>3</b>Firefox port — same API</div>
+    </div>
+  </div>
+  <div class="foot"><span>Unseen</span><span class="n">8 / 9</span></div>
+</section>
+
+<!-- 9 · close -->
+<section class="slide close" data-notes="LinkedIn checked if you're Muslim. Now you can see it — and stop it. Unseen.">
+  <div class="body cols">
+    <div>
+      <h1>Unseen</h1>
+      <p class="lede">See what websites try to learn about you. Then stop them.</p>
+      <div class="url">github.com/mjzb777/MuslimHacks</div>
+    </div>
+    <div class="card" aria-label="Unseen card, protected">
+      <header><b>Unseen</b><span>browserleaks.com</span></header>
+      <div class="box">
+        <div class="hl">This site checked which extensions you have installed.</div>
+        It looked for <b>5,000 extensions</b>. Every probe was answered with "not installed".
+        <div class="by">Done by the site's own code.</div>
+      </div>
+      <h4>What it learned about you</h4>
+      <div class="box"><span class="learned green">Nothing — 5,000 probes were blocked.</span></div>
+      <div class="btn on">Protected on this site ✓</div>
+      <div class="foot">Everything shown here was computed on your device. Nothing is sent anywhere.</div>
+    </div>
+  </div>
+  <div class="foot"><span>MuslimHacks 2026, Challenge 03</span><span class="n">9 / 9</span></div>
+</section>
+
+</div>
+</div>
+
+<div class="notes" id="notes" aria-live="polite"><span class="t">Say</span><span id="notesText"></span></div>
+<div class="help" id="help"><kbd>←</kbd><kbd>→</kbd> slides <kbd>F</kbd> fullscreen <kbd>N</kbd> notes <kbd>Ctrl+P</kbd> PDF</div>
+
+<script>
+(() => {
+  const slides = [...document.querySelectorAll(".slide")];
+  const stage = document.getElementById("stage");
+  const notes = document.getElementById("notes");
+  const notesText = document.getElementById("notesText");
+  const help = document.getElementById("help");
+  let i = 0;
+
+  function fit() {
+    const s = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = `scale(${s})`;
+  }
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((el, k) => el.classList.toggle("current", k === i));
+    notesText.textContent = slides[i].dataset.notes || "";
+    history.replaceState(null, "", "#" + (i + 1));
+  }
+  function fromHash() {
+    const n = parseInt(location.hash.slice(1), 10);
+    show(Number.isFinite(n) ? n - 1 : 0);
+  }
+
+  addEventListener("keydown", (e) => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    switch (e.key) {
+      case "ArrowRight": case "ArrowDown": case " ": case "PageDown": case "Enter": e.preventDefault(); show(i + 1); break;
+      case "ArrowLeft": case "ArrowUp": case "PageUp": case "Backspace": e.preventDefault(); show(i - 1); break;
+      case "Home": show(0); break;
+      case "End": show(slides.length - 1); break;
+      case "f": case "F": document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); break;
+      case "n": case "N": notes.toggleAttribute("data-on"); break;
+      case "Escape": notes.removeAttribute("data-on"); break;
+    }
+  });
+  addEventListener("click", (e) => {
+    if (e.target.closest(".notes, .help")) return;
+    show(e.clientX < innerWidth * 0.2 ? i - 1 : i + 1);
+  });
+  let tx = null;
+  addEventListener("touchstart", (e) => { tx = e.touches[0].clientX; }, { passive: true });
+  addEventListener("touchend", (e) => {
+    if (tx === null) return;
+    const dx = e.changedTouches[0].clientX - tx; tx = null;
+    if (Math.abs(dx) > 40) show(dx < 0 ? i + 1 : i - 1);
+  });
+  addEventListener("resize", fit);
+  addEventListener("hashchange", fromHash);
+  document.addEventListener("fullscreenchange", () => { help.hidden = !!document.fullscreenElement; fit(); });
+
+  fit();
+  fromHash();
+})();
+</script>
