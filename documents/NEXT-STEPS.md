@@ -43,6 +43,24 @@ hardening → `canvas.getImageData` bit flip → `navigator.*` generics (all in
 | C4 | Edit: cut dead time, zoom on the card, captions, export 1080p MP4 ≤ 2:30. | | ☐ |
 | C5 | Copy to the demo laptop **and** a phone. Test playback with sound. | | ☐ |
 
+## C2. Devpost submission
+
+Gallery images are in `documents/devpost/` (1920×1080, upload in this order). Captions to
+paste with each:
+
+| File | Caption |
+|---|---|
+| `01-cover.png` | Unseen: see what websites try to learn about you, then stop them. Chrome extension, everything runs on your device. |
+| `02-problem.png` | BrowserGate: LinkedIn's own script probed 6,222 extensions per visitor, including PordaAI. No blocker can see it. |
+| `03-before-after.png` | The real card on browserleaks.com before and after one click. 5,000 probes, all answered "not installed". |
+| `04-real-sites.png` | Verified on browserleaks, amazon, fingerprint.com, LinkedIn, CreepJS, and quiet on Wikipedia. |
+| `05-how-it-works.png` | MAIN-world detector → bridge → pure inference → card. Nothing blocked on the network, nothing leaves the device. |
+| `06-numbers.png` | 5,000→0 probes, +6 ms, 97.6 % coverage, 14 unit + 15 e2e tests, 0 servers. |
+
+Regenerate after any popup change: `node tools/screenshot-popup.mjs documents/devpost/src-card-before.png --zoom 2 https://browserleaks.com/chrome`,
+same with `--protect` into `src-card-after.png`, then `node tools/render-devpost.mjs`.
+Edit the layouts in `documents/devpost/source.html`.
+
 ## D. How teams make demo videos that look good
 
 The trick is that nothing is live. It is a screen recording with **no dead time, a zoom on the
